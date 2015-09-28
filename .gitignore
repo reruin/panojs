@@ -1,0 +1,6 @@
+.idea/
+*.psd
+*.xml
+web.config
+_/
+__/

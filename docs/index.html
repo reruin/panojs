@@ -1,0 +1,1202 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/main.css">
+
+    <title>P.JS Panorama Javascript Developer Version</title>
+
+</head>
+
+<body>
+
+<!-- end div.sandbar -->
+
+<div id="wrapper">
+
+<div id="main" class="main">
+
+
+<div id="content">
+
+<div>
+
+<h1 class="page-title">P.JS Panorama Javascript API</h1>
+
+<div>
+
+
+<h2>Draft Version</h2>
+
+<p><i>Last updated Jan. 12, 2015</i></p>
+
+<div class="special">
+    <p>This reference documents (the <i><b>draft</b></i>
+        version build at Sep. 18, 2014) is the P.JS Javascript API. This
+        version of the API is a draft version of the API whose interfaces
+        are part unavailable.</p>
+
+    <p>本文档是 P.JS 全景库 API，当前版本(草稿版)有部分API未实现。</p>
+</div>
+<h2>Reference Table of Contents</h2>
+
+<p id="p"><strong>P</strong></p>
+<ul>
+<li><a href="#P">P</a></li>
+</ul>
+
+<p id="pano"><strong>Pano</strong></p>
+<ul>
+    <li><a href="#Pano">Pano</a></li>
+    <li><a href="#PanoOptions">PanoOptions</a></li>
+    <li><a href="#PanoPov">PanoPov</a></li>
+    <li><a href="#PanoLocation">PanoLocation</a></li>
+    <li><a href="#PanoLink">PanoLink</a></li>
+    <li><a href="#PanoData">PanoData</a></li>
+    <li><a href="#PanoTileData">PanoTileData</a></li>
+    <li><a href="#PanoPoiData">PanoPoiData</a></li>
+    <li><a href="#PanoAnimation">PanoAnimation</a></li>
+</ul>
+
+
+<!--<p id="geom"><strong>Geom</strong></p>
+<ul>
+    <li><a href="#Point">Point</a></li>
+    <li><a href="#Vector3">Vector3</a></li>
+    <li><a href="#Matrix4">Matrix4</a></li>
+</ul>-->
+<p id="base"><strong>Base</strong></p>
+<ul>
+    <li><a href="#EventDispather">PanoAddressControlOptions</a></li>
+</ul>
+
+<p id="controls"><strong>Controls</strong></p>
+<ul>
+    <li><a href="#PanoAddressControlOptions">PanoAddressControlOptions</a></li>
+</ul>
+
+<p id="overlays"><strong>Overlays</strong></p>
+<ul>
+    <li><a href="#Label">Label</a></li>
+    <li><a href="#LabelOptions">LabelOptions</a></li>
+
+</ul>
+
+<p id="providers"><strong>Providers</strong></p>
+<ul>
+    <li><a href="#Provider">Provider</a></li>
+    <li><a href="#BasicProvider">BasicProvider</a></li>
+    <li><a href="#QQProvider">QQProvider</a></li>
+    <li><a href="#LocalProvider">LocalProvider</a></li>
+</ul>
+
+<p><strong>Events</strong></p>
+<ul>
+    <li><a href="#event">event</a></li>
+</ul>
+
+<h2 id="P">
+    P Factory
+</h2>
+<h3>Static Methods</h3>
+<table width="100%">
+    <thead>
+    <tr><th>Factory</th>
+        <th>Return Value</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+
+    <tr>
+        <td><code>P(panoDiv:<HTMLElement|String>,opts:<a href="#PanoOptions"><em>PanoOptions</em></a>)</code></td>
+        <td><code><a href="#Pano">Pano</a></code></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><code>P.point(x:* , y:*)</code></td>
+        <td><code><a href="#Point">Point</a></code></td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td><code>P.label(opts:<a href="#LabelOptions">LabelOptions</a>)</code></td>
+        <td><code><a href="#Label">Label</a></code></td>
+        <td></td>
+    </tr>
+
+    </tbody>
+</table>
+
+<h2 id="Pano">
+    P.Pano
+    class
+</h2>
+
+<h3>Constructor</h3>
+<table width="100%">
+    <thead>
+    <tr>
+        <th>Constructor</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>Pano(mapDiv:Node, opts:<a href="#PanoOptions"><em>PanoOptions</em></a>)</code></td>
+        <td>(必须) 全景容器，实例化一个对象需要在网页中创建一个<code>DIV</code>元素.</td>
+    </tr>
+    </tbody>
+</table>
+<h3>Methods</h3>
+<table width="100%">
+    <thead>
+    <tr>
+        <th>Methods</th>
+        <th>Return Value</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>getPano()</code></td>
+        <td><code>string</code></td>
+        <td>返回全景ID.</td>
+    </tr>
+    <tr>
+        <td><code>getLocation()</code></td>
+        <td><code><a href="#PanoLocation">PanoLocation</a></code></td>
+        <td>Returns the PanoLocation of the current panorama.<br/>返回当前全景的定位信息。
+        </td>
+    </tr>
+
+    <tr>
+        <td><code>getPhotographerPov()</code></td>
+        <td><code><a href="#PanoPov">PanoPov</a></code></td>
+        <td>Returns the heading and pitch of the panorama when this panorama was taken. For panoramas on the road, this
+            also reveals in which direction the car(man) was travelling(wakling). This data is available after the
+            <code>pano_changed</code> event.<br/>
+            返回当前全景的拍摄朝向（航向和俯仰），通常全景图中间位置即是拍摄方向。可通过<code>pano_changed</code>事件获取该值。
+        </td>
+    </tr>
+    <tr>
+        <td><code>getPosition()</code></td>
+        <td><code><a href="#Latlng">Latlng</a></code></td>
+        <td>Returns the current <code>LatLng</code> position for the Panorama.<br/>
+            返回当前全景的地理位置信息。
+        </td>
+    </tr>
+
+    <tr>
+        <td><code>getPov()</code></td>
+        <td><code><a href="#PanoPov">PanoPov</a></code></td>
+        <td>Returns the current point of view for the panorama.<br/>返回全景查看器的视角</td>
+    </tr>
+
+    <tr>
+        <td><code>getLinks()</code></td>
+        <td><code>Array.<<a href="#PanoLink">PanoLink</a>></code></td>
+        <td>Returns the set of navigation links for the panorama.<br/>返回全景邻接关系。</td>
+    </tr>
+
+    <tr>
+        <td><code>getVisible()</code></td>
+        <td><code>boolean</code></td>
+        <td>Returns <code>true</code> if the panorama is visible.<br/>获取街景查看器的显示状态（显示/隐藏）。</td>
+    </tr>
+
+    <tr>
+        <td><code>getZoom()</code></td>
+        <td><code>number</code></td>
+        <td>Returns the zoom level of the panorama. Fully zoomed-out is level 0, where the field of view is 180 degrees.
+            Zooming in increases the zoom level.<br/>获取缩放级别。
+        </td>
+    </tr>
+
+    <tr>
+        <td><code>setOptions(options:<a href="#PanoOptions"><em>PanoaOptions</em></a>)</code></td>
+        <td><code>this</code></td>
+        <td>Sets a collection of key-value pairs.<br/>设置街景参数.</td>
+    </tr>
+
+    <tr>
+        <td><code>setPov(pov:<a href="#PanoPov"><em>PanoPov</em></a>)</code></td>
+        <td><code>this</code></td>
+        <td>Sets the point of view for the Panorama.<br/>设置全景查看器的视角。</td>
+    </tr>
+
+    <tr>
+        <td><code>setLinks()</code></td>
+        <td><code>Array.<<a href="#PanoLink">PanoLink</a>></code></td>
+        <td>Sets the set of navigation links for the panorama.<br/>设置全景邻接关系。</td>
+    </tr>
+
+    <tr>
+        <td><code>setVisible(flag:boolean)</code></td>
+        <td><code>this</code></td>
+        <td>Sets to <code>true</code> to make the panorama visible. If set to <code>false</code>, the panorama will be
+            hidden.<br/>
+            设置全景查看器的显示状态。<code>false</code>时全景将不可见。
+        </td>
+    </tr>
+
+    <tr>
+        <td><code>setZoom(zoom:number)</code></td>
+        <td><code>this</code></td>
+        <td>Sets the zoom level of the panorama. Fully zoomed-out is level 0, where the field of view is
+            <code>maxFov</code> degrees. Zooming in increases the zoom level.<br/>
+            设置缩放级别，无动画。zoom级别通过maxfov和minfov自动计算获得。 最小值为0。
+        </td>
+    </tr>
+
+    <tr>
+        <td><code>addProvider(provider:<a href="#Provider"><em>Provider</em></a>)</code></td>
+        <td><code>this</code></td>
+        <td>Set the custom panorama provider called on pano change to load custom panoramas.<br/>
+            注册自定义全景图方法。
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Properties</h3>
+<table width="100%">
+    <thead>
+    <tr>
+        <th>Properties</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+   <!-- <tr>
+        <td><code>controls</code></td>
+        <td><code>Array.<a href="#Control">Control</a></code></td>
+        <td>Additional controls to attach to the panorama.
+        </td>
+    </tr>-->
+    <tr>
+        <td><code>heading</code></td>
+        <td><code>number</code></td>
+        <td>返回偏航</td>
+    </tr>
+    <tr>
+        <td><code>pitch</code></td>
+        <td><code>number</code></td>
+        <td>返回俯仰角</td>
+    </tr>
+    <tr>
+        <td><code>fov</code></td>
+        <td><code>number</code></td>
+        <td>return filed of view. 返回视场大小。</td>
+    </tr>
+   <tr>
+       <td><code>animation</code></td>
+       <td><code><a href="#PanoAnimation">PanoAnimation</a></code></td>
+       <td>返回动画控制器。</td>
+   </tr>
+   </tbody>
+</table>
+
+<h3>Events</h3>
+<table width="100%">
+    <thead>
+    <tr>
+        <th>Events</th>
+        <th>Arguments</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>pano_changed</code></td>
+        <td><code>None</code></td>
+        <td>This event is fired when the panorama's pano id changes.全景场景改变时触发此事件。</td>
+    </tr>
+
+    <tr>
+        <td><code>link_changed</code></td>
+        <td><code>None</code></td>
+        <td>全景邻接关系变化时触发此事件。一般情况此事件紧随<code>pano_changed</code>,可以侦听此事件以实时更改 邻接信息。</td>
+    </tr>
+
+    <tr>
+        <td><code>pov_changed</code></td>
+        <td><code>None</code></td>
+        <td>This event is fired when the panorama's point-of-view changes. The point of view changes as the pitch or
+            heading changes.
+            <br/>俯仰角发生改变时会触发此事件。
+        </td>
+    </tr>
+
+    <tr>
+        <td><code>visible_changed</code></td>
+        <td><code>None</code></td>
+        <td>This event is fired when the panorama's visibility changes. The visibility is changed when the Pegman is
+            dragged onto the map, the close button is clicked, or <code>setVisible()</code> is called.<br/>显示/隐藏状态发生变化时会触发此事件。
+        </td>
+    </tr>
+
+    <tr>
+        <td><code>zoom_changed</code></td>
+        <td><code>None</code></td>
+        <td>This event is fired when the panorama's zoom level changes.<br/>缩放级别发生改变时会触发此事件。</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 id="PanoOptions">
+    P.pano.PanoOptions
+    object specification
+</h2>
+
+<p>Options defining the properties of a <code>Pano</code> object.<br/>
+    <code>Pano</code>对象的参数，此类没有构造函数，通过对象字面量形式表示。
+</p>
+
+<h3>Properties</h3>
+<table width="100%">
+    <thead>
+    <tr>
+        <th>Properties</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>addressControl</code></td>
+        <td><code>boolean</code></td>
+        <td>The enabled/disabled state of the address control.<br/>地址控件的初始启用/停用状态.</td>
+    </tr>
+    <tr>
+        <td><code>addressControlOptions</code></td>
+        <td><code><a href="#PanoAddressControlOptions">PanoAddressControlOptions</a></code></td>
+        <td>The display options for the address control.<br/>地址控件的初始化选项</td>
+    </tr>
+
+    <tr>
+        <td><code>disableDefaultUI</code></td>
+        <td><code>boolean</code></td>
+        <td>Enables/disables all default UI. May be overridden individually.<br/>全局启用/停用所有控件。</td>
+    </tr>
+
+    <tr class="disabled">
+        <td><code>disableDoubleClickZoom</code></td>
+        <td><code>boolean</code></td>
+        <td>Enables/disables zoom on double click. Disabled by default.<br>启用/禁用双击放大。</td>
+    </tr>
+
+    <tr class="disabled">
+        <td><code>imageDateControl</code></td>
+        <td><code>boolean</code></td>
+        <td>The enabled/disabled state of the imagery acquisition date control. Disabled by default.<br/>拍摄时间控件的初始启用/停用状态,默认为禁用
+        </td>
+    </tr>
+
+    <tr class="disabled">
+        <td><code>panControl</code></td>
+        <td><code>boolean</code></td>
+        <td>The enabled/disabled state of the pan control.<br/>平移操作控件</td>
+    </tr>
+
+    <tr>
+        <td><code>panControlOptions</code></td>
+        <td><code><a href="#PanControlOptions">PanControlOptions</a></code></td>
+        <td>The display options for the pan control.<br/>平移操作控件选项</td>
+    </tr>
+
+    <tr>
+        <td><code>pano</code></td>
+        <td><code>string</code></td>
+        <td>The panorama ID, which should be set when specifying a custom panorama.<br/>场景地唯一标示。</td>
+    </tr>
+
+    <tr>
+        <td><code>pov</code></td>
+        <td><code><a href="#PanoPov">PanoPov</a></code></td>
+        <td>The camera orientation, specified as heading and pitch, for the panorama.<br/>修改初始场景的俯仰角。</td>
+    </tr>
+
+    <tr>
+        <td><code>provider</code></td>
+        <td><code><a href="#Provider">Provider</a></code></td>
+        <td>注册全景图方法。要显示全景图，必须注册全景图方法 或 显式调用<code>Pano.addProvider()</code>。</td>
+    </tr>
+
+    <tr>
+        <td><code>scrollwheel</code></td>
+        <td><code>boolean</code></td>
+        <td>If false, disables scrollwheel zooming in Pano View. The scrollwheel is enabled by default.<br/>滚轮是否触发zoom,false时不触发。默认值true。
+        </td>
+    </tr>
+
+    <tr>
+        <td><code>visible</code></td>
+        <td><code>boolean</code></td>
+        <td>If <code>true</code>, the Street View panorama is visible on load.<br/>显示状态，true 时可见。</td>
+    </tr>
+
+    <tr class="disabled">
+        <td><code>zoomControl</code></td>
+        <td><code>boolean</code></td>
+        <td>The enabled/disabled state of the zoom control.<br/>启用/禁用缩放控件。默认 false。</td>
+    </tr>
+
+    <tr class="disabled">
+        <td><code>zoomControlOptions</code></td>
+        <td><code><a href="#ZoomControlOptions">ZoomControlOptions</a></code></td>
+        <td>The display options for the zoom control.<br/>缩放控件选项</td>
+    </tr>
+
+    <tr>
+        <td><code>controlMode</code></td>
+        <td><code>int</code></td>
+        <td>鼠标/触控模式,2：在视野中心保持跟随，1：水平和垂直方向都跟随，0：控制模式。默认2</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 id="PanoPov">
+    P.pano.PanoPov
+    object specification
+</h2>
+<P>A point of view object which specifies the camera's orientation at the Street View panorama's position. The point of view is defined as heading and pitch.<br /
+    >此类描述全景的视角。使用对象字面量形式表示，不可实例化。</P>
+<h3>Properties</h3>
+<table width="100%">
+    <thead>
+    <tr>
+        <th>Properties</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>heading</code></td>
+        <td><code>number</code></td>
+        <td>The camera heading in degrees relative to true north. True north is 0°, east is 90°, south is 180°, west is
+            270°.<br/>
+            相机朝向，正北为0°，正东为90°，正南为180°，正西为270°。
+        </td>
+    </tr>
+    <tr>
+        <td><code>pitch</code></td>
+        <td><code>number</code></td>
+        <td>The camera pitch in degrees, relative to the vehicle. Ranges from -90° (directly upwards) to 90° (directly
+            downwards).<br/>
+            相机俯仰角，单位 度，取值(-90,90)，水平方向为0，向上为负值，向下为正
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+<h2 id="PanoAddressControlOptions">
+    P.pano.PanoAddressControlOptions
+    object specification
+</h2>
+
+<h3>Properties</h3>
+<table width="100%">
+    <thead>
+    <tr>
+        <th>Properties</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>position</code></td>
+        <td><code><a href="#ControlPosition">ControlPosition</a></code></td>
+        <td>Position id. This id is used to specify the position of the control on the map. The default position is
+            <code>TOP_LEFT</code>.
+            <br/>
+            设置地址控件位置，默认为左上角。
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 id="PanoLocation">
+    P.pano.PanoLocation
+    object specification
+</h2>
+
+<h3>Properties</h3>
+<table width="100%">
+    <thead>
+    <tr>
+        <th>Properties</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>description</code></td>
+        <td><code>string</code></td>
+        <td>A localized string describing the location.<br>
+            当前位置描述
+        </td>
+    </tr>
+    <tr>
+        <td><code>latLng</code></td>
+        <td><code><a href="#LatLng">LatLng</a></code></td>
+        <td>The latlng of the panorama.全景所在经纬度。</td>
+    </tr>
+    <tr>
+        <td><code>pano</code></td>
+        <td><code>string</code></td>
+        <td>A unique identifier for the panorama. This is stable within a session but unstable across sessions.
+            <br/> 全景唯一标示（只需在此应用中唯一即可）。
+        </td>
+    </tr>
+    <tr>
+        <td><code>shortDescription</code></td>
+        <td><code>string</code></td>
+        <td>Short description of the location.短描述</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 id="PanoLink">
+    P.pano.PanoLink
+    object specification
+</h2>
+<p>A collection of references to adjacent panos.<br />全景邻接关系集</p>
+<h3>Properties</h3>
+<table width="100%">
+    <thead>
+    <tr><th>Properties</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+    <tr>
+        <td><code>description</code></td>
+        <td><code>string</code></td>
+        <td>A localized string describing the link.<br />指向描述.</td>
+    </tr>
+    <tr>
+        <td><code>heading</code></td>
+        <td><code>number</code></td>
+        <td>The heading of the link.<br />指向方位.</td>
+    </tr>
+    <tr>
+        <td><code>pano</code></td>
+        <td><code>string</code></td>
+        <td>A unique identifier for the panorama.<br/>指向的全景id.</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 id="PanoData">
+    P.pano.PanoData
+    object specification
+</h2>
+
+<p>
+    <br/>全景元数据。
+</p>
+
+<h3>Properties</h3>
+<table width="100%">
+    <thead>
+    <tr>
+        <th>Properties</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>copyright</code></td>
+        <td><code>string</code></td>
+        <td>Specifies the copyright text for this panorama.<br/>全景图的版权信息。</td>
+    </tr>
+    <tr>
+        <td><code>imageDate</code></td>
+        <td><code>string</code></td>
+        <td>Specifies the year and month in which the imagery in this panorama was acquired. The date string is in the
+            form YYYY-MM-DD.
+            <br/>全景的获取时间,格式 YYYY-MM-DD。
+        </td>
+    </tr>
+    <tr>
+        <td><code>links</code></td>
+        <td><code>Array.&lt;<a href="#PanoLink">PanoLink</a>&gt;</code></td>
+        <td>Specifies the navigational links to adjacent panoramas.<br/>
+            （可选）相邻的导航链接，可用于分组全景。
+        </td>
+    </tr>
+    <tr>
+        <td><code>location</code></td>
+        <td><code><a href="#PanoLocation">PanoLocation</a></code></td>
+        <td>Specifies the location meta-data for this panorama.<br/>
+            全景位置的元数据信息。
+        </td>
+    </tr>
+    <tr>
+        <td><code>tiles</code></td>
+        <td><code><a href="#PanoTileData">PanoTileData</a></code></td>
+        <td>Specifies the custom tiles for this panorama.<br/>
+            全景瓦片信息。包括瓦片地址、瓦片大小。
+        </td>
+    </tr>
+    </tbody>
+</table>
+<p>以下是一组全景元数据 示例</p>
+<pre>{<br>&nbsp; "location": {<br>&nbsp; &nbsp; "latLng": <span class="typ">LatLng,<br>&nbsp; &nbsp; "description": <span class="kwd">string,<br>&nbsp; &nbsp; "pano": <span class="kwd">string<br>&nbsp; },<br>&nbsp; "copyright": <span class="kwd">string,<br>&nbsp; "links": [{<br>&nbsp; &nbsp; &nbsp; "heading": number,<br>&nbsp; &nbsp; &nbsp; "description": <span class="kwd">string,<br>&nbsp; &nbsp; &nbsp; "pano": <span class="kwd">string,<br>&nbsp; &nbsp; &nbsp; "roadColor": <span class="kwd">string,<br>&nbsp; &nbsp; &nbsp; "roadOpacity": number<br>&nbsp; &nbsp; }],<br>&nbsp; "tiles": {<br>&nbsp; &nbsp; "worldSize": <span class="typ">Size,<br>&nbsp; &nbsp; "tileSize": <span class="typ">Size,<br>&nbsp; &nbsp; "centerHeading": number<br>&nbsp; }<br>}</pre>
+
+<h2 id="PanoTileData">
+    P.pano.PanoTileData
+    object specification
+</h2>
+<h3>Methods</h3>
+<table width="100%">
+    <thead>
+    <tr><th>Methods</th>
+        <th>Return Value</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+    <tr>
+        <td><code>getTileUrl(p:object)</code></td>
+        <td><code>string</code></td>
+        <td>Gets the tile image URL for the specified tile.<br> <code>p={x:int , y:int , z:int , id:string}</code>. id is the panorama ID of the tile.<br> <code>z</code> is the zoom level of the tile.<br> <code>x</code> is the x-coordinate of the tile.<br> <code>y</code> is the y-coordinate of the tile.<br> Returns the URL for the tile image.<br>
+        <br />根据<code>p={x:int , y:int , z:int , id:string}</code> 返回对应的全景瓦片。
+        </td>
+    </tr>
+    </tbody>
+</table>
+<h3>Properties</h3>
+<table width="100%">
+    <thead>
+    <tr><th>Properties</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+    <tr>
+        <td><code>centerHeading</code></td>
+        <td><code>number</code></td>
+        <td>The heading (in degrees) at the center of the panoramic tiles.<br />
+            正北方 与 全景图中间方向 的角度(顺时针)。
+        </td>
+    </tr>
+    <tr>
+        <td><code>tileSize</code></td>
+        <td><code>number</code></td>
+        <td>The size (in pixels) at which tiles will be rendered.<br />
+            瓦片尺寸
+        </td>
+    </tr>
+    <tr>
+        <td><code>worldSize</code></td>
+        <td><code><a href="#Size">Size</a></code></td>
+        <td>The size (in pixels) of the whole panorama's "world".<br/>
+            全景全图尺寸。
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+<h2 id="PanoPoiData">
+    P.pano.PanoPoiData
+    object specification
+</h2>
+
+<p>
+    poi元数据。
+</p>
+<h3>Properties</h3>
+<table width="100%">
+    <thead>
+    <tr><th>Properties</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+    <tr>
+        <td><code>type</code></td>
+        <td><code>string</code></td>
+        <td>poi类型.
+        </td>
+    </tr>
+    <tr>
+        <td><code>position</code></td>
+        <td><code>Latlng</code></td>
+        <td>poi所在地理位置。
+        </td>
+    </tr>
+    <tr>
+        <td><code>altitude</code></td>
+        <td><code>number</code></td>
+        <td>poi所在高度。
+        </td>
+    </tr>
+    <tr>
+        <td><code>title</code></td>
+        <td><code>string</code></td>
+        <td>poi名称
+        </td>
+    </tr>
+    <tr>
+        <td><code>id</code></td>
+        <td><code>string</code></td>
+        <td>poi唯一标示(可选)。
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+<h2 id="Label">
+    P.Overlays.Label
+    class
+</h2>
+<p>此类用于向Pano中添加地物标记。</p>
+<h3>Constructor</h3>
+<table width="100%">
+    <thead>
+    <tr><th>Constructor</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+    <tr>
+        <td><code>Label(opts?:<a href="#LabelOptions"><em>LabelOptions</em></a>)</code></td>
+        <td>Creates a marker with the options specified. If a map is specified, the marker is added to the map upon construction. Note that the position must be set for the marker to display.</td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Methods</h3>
+<table width="100%">
+    <thead>
+    <tr><th>Methods</th>
+        <th>Return Value</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+    <tr>
+        <td><code>getPano()</code></td>
+        <td><code><a href="#Pano">Pano</a></code></td>
+        <td>获得Label显示的全景对象。</td>
+    </tr>
+    <tr>
+        <td><code>getPosition()</code></td>
+        <td><code><a href="#Latlngo">Latlng</a></code></td>
+        <td>获取Label所在的位置坐标。</td>
+    </tr>
+    <tr>
+        <td><code>getAltitude()</code></td>
+        <td><code>number</code></td>
+        <td>获得Label距离地面的高度。</td>
+    </tr>
+    <tr>
+        <td><code>getContent()</code></td>
+        <td><code>string</code></td>
+        <td>返回Label的内容信息。</td>
+    </tr>
+
+    <tr>
+        <td><code>setPano(map:<a href="#Pano">Pano</a>)</code></td>
+        <td><code>this</code></td>
+        <td>设置label要显示的全景对象。</td>
+    </tr>
+    <tr>
+        <td><code>setPosition(position:<a href="#Latlngo">Latlng</a>)</code></td>
+        <td><code>this</code></td>
+        <td>设置Label所在的位置。</td>
+    </tr>
+    <tr>
+        <td><code>setAltitude(altitude:number)</code></td>
+        <td><code>this</code></td>
+        <td>设置label要显示的全景对象。</td>
+    </tr>
+    <tr>
+        <td><code>setContent(content:String)</code></td>
+        <td><code>this</code></td>
+        <td>设置content的内容信息。</td>
+    </tr>
+    <tr>
+        <td><code>setLocation(opts:Object)</code></td>
+        <td><code>this</code></td>
+        <td>设置pano位置信息，有两种方式可选:<br/>
+            (a) <code>opts = {position:Latlng , altitude : number}</code>：使用经纬度绝对定位，等同于 setPosition()\ setAltitude()<br/>
+            (b) <code>opts = {position:Latlng , distance : number}</code>：相对全景点定位，position标示球面坐标，distance标示距离此全景的距离。Label距全景点较远时不建议使用此方式。<br />
+            应用内部始终以a)方式保存数据。
+        </td>
+    </tr>
+
+
+    </tbody>
+</table>
+
+<h2 id="LabelOptions">
+    P.Overlays.LabelOptions
+    object specification
+</h2>
+<h3>Properties</h3>
+<table width="100%">
+    <thead>
+    <tr><th>Properties</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+    <tr>
+        <td><code>position</code></td>
+        <td><code><a href="#Latlng">Latlng</a></code></td>
+        <td>标注所在位置。</td>
+    </tr>
+    <tr>
+        <td><code>altitude</code></td>
+        <td><code>number</code></td>
+        <td>label距离地面的高度，单位m.</td>
+    </tr>
+    <tr>
+        <td><code>content</code></td>
+        <td><code>string</code></td>
+        <td>Label中显示的内容,不能使用HTMLElement</td>
+    </tr>
+    <tr>
+        <td><code>visible</code></td>
+        <td><code>boolean</code></td>
+        <td>Label的可见性。如果为 true，则显示标记。</td>
+    </tr>
+    <tr>
+        <td><code>panorama</code></td>
+        <td><code><a href="#Pano">Pano</a></code></td>
+        <td>要置入的场景对象。</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 id="Provider">
+    P.Provider
+    class
+</h2>
+
+<p>Provider基类，用于自定义 PanoService 数据提供服务，可参考 <code><a target="_blank" href="http://open.map.qq.com/javascript_v2/doc/panoramaservice.html">qq.maps.PanoramaService</a></code>。通过Pano.addProvider()添加该类，如果Pano存在多个Provider，<code>Pano.setPano()</code>方法执行时，将遍历所有Provider并返回第一个结果。可以在此基础上扩展Provider，与其他Panorama提供商进行桥接。该类不能实例化。<br />This interface defines the Provider, and is typically used for custom panorama service.</p>
+
+<h3>Methods</h3>
+<table width="100%">
+    <thead>
+    <tr>
+        <th>Methods</th>
+        <th>Return Value</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>getPanoById(id:string , callback:function(<a href="#PanoData">PanoData</a>){})</td>
+        <td><code><a href="#PanoData">PanoData</a></code></td>
+        <td>Retrieves the data for the given pano id and passes it to the provided callback as a PanoData object. <br />
+            根据全景id返回全景数据 PanoData 对象，当获取不到数据时，回调函数参数为null
+        </td>
+       <!-- <td>Gets the tile image URL for the specified tile. 获取全景瓦片。<br/><code>p={x:int,y:int,z:int,f:string,panoid:string}</code>-->
+        </td>
+    </tr>
+    <tr class="disabled">
+        <td><code>getPanoByLocation(id:string , radius:number = 50, callback:function(<a href="#PanoData">PanoData</a>){})</td>
+        <td><code><a href="#PanoData">PanoData</a></code></td>
+        <td>Retrieves the PanoData for a panorama within a given radius of the given LatLng. <br />
+            根据坐标及半径返回该范围内最近点的全景数据；默认半径为50m。
+        </td>
+        <!-- <td>Gets the tile image URL for the specified tile. 获取全景瓦片。<br/><code>p={x:int,y:int,z:int,f:string,panoid:string}</code>-->
+        </td>
+    </tr>
+    <tr class="">
+        <td><code>getPoiById(id:string , callback:function(Array.<<a href="#PoiData">PoiData</a>>){})</td>
+        <td><code>Array.<<a href="#PoiData">PoiData</a>></code></td>
+        <td>
+            根据全景id返回周边热点数据。
+        </td>
+        <!-- <td>Gets the tile image URL for the specified tile. 获取全景瓦片。<br/><code>p={x:int,y:int,z:int,f:string,panoid:string}</code>-->
+        </td>
+    </tr>
+
+
+    </tbody>
+</table>
+
+<h3>Properties</h3>
+<table width="100%">
+    <thead>
+    <tr>
+        <th>Properties</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>sync</code></td>
+        <td><code>boolean</code></td>
+        <td>标示该Provider的<code>getPanoById</code>方式是否直接返回<code>PanoData结果</code>,true时直接返回结果，false时需要异步获取。默认为true。</td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+<h2 id="BasicProvider">
+    P.provider.BasicProvider
+    class
+</h2>
+<p>用于本地生成PanoData序列的Provider，通过规范化panoid自动生成imageData、部分location(latlng)、centerHeading数据。
+    <br /> This class extends
+    <code><a href="#Provider">Provider</a></code>.
+</p>
+<h3>Constructor</h3>
+<table width="100%">
+    <thead>
+    <tr>
+        <th>Constructor</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>BasicProvider(opts:<a href="#BasicProviderOptions"><em>BasicProviderOptions</em></a>)</code></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<h2 id="BasicProviderOptions">
+    P.provider.BasicProviderOptions
+    object specification
+</h2>
+<h3>Properties</h3>
+<table width="100%">
+    <thead>
+    <tr>
+        <th>Properties</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>tileSize</code></td>
+        <td><code>number</code></td>
+        <td>（必须）The size (in pixels) at which tiles will be rendered.<br/>全景图块展示的尺寸（单位像素），这个尺寸可以不是实际的图片尺寸。</td>
+    </tr>
+    <tr>
+        <td><code>maxDeep</code></td>
+        <td><code>int</code></td>
+        <td>（必须）全景图块分层数量。</td>
+    </tr>
+
+    <tr>
+        <td><code>maxpixelzoom</code></td>
+        <td><code>int</code></td>
+        <td>缩放级别到达maxDeep之后允许的缩放量。默认 1</td>
+    </tr>
+
+    <tr>
+        <td><code>getTile</code></td>
+        <td><code>Function</code></td>
+        <td>瓦片获取函数,与tileUri必须设定一项</td>
+    </tr>
+
+    <tr>
+        <td><code>tileUri</code></td>
+        <td><code>string</code></td>
+        <td>标准瓦片获取地址<code>{x},{y},{z},{f},{id}</code>，与getTile必须设定一项</td>
+    </tr>
+
+    <tr>
+        <td><code>copyright</code></td>
+        <td><code>string</code></td>
+        <td>版权信息</td>
+    </tr>
+    </tbody>
+</table>
+
+
+<h2 id="QQProvider">
+    P.provider.QQProvider
+    class
+</h2>
+<p>此自定义方法用于桥接腾讯全景。
+    <br /> This class extends
+    <code><a href="#Provider">Provider</a></code>.
+</p>
+<h3>Constructor</h3>
+<table width="100%">
+    <thead>
+    <tr>
+        <th>Constructor</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>QQProvider(svid?:string)</code></td>
+        <td>QQ全景的ID</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 id="LocalProvider">
+    P.provider.LocalProvider
+    class
+</h2>
+<p>此自定义方法用于本地全景。
+    <br /> This class extends
+    <code><a href="#Provider">Provider</a></code>.
+</p>
+<h3>Constructor</h3>
+<table width="100%">
+    <thead>
+    <tr>
+        <th>Constructor</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>LocalProvider(opts:LocalProviderOptions)</code></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<h2 id="LocalProviderOptions">
+    P.provider.LocalProviderOptions
+    class
+</h2>
+<p>LocalProvider对象参数
+    <br /> This class extends
+    <code><a href="#Provider">Provider</a></code>.
+</p>
+<h3>Constructor</h3>
+<table width="100%">
+    <thead>
+    <tr>
+        <th>Constructor</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>LocalProvider(opts:LocalProviderOptions)</code></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 id="PanoAnimation">
+    P.PanoAnimation
+    object specification
+</h2>
+<p>动画控制类，不能实例化，使用<code>Pano.animation</code>获取该对象。</p>
+<h3>Methods</h3>
+<table width="100%">
+    <thead>
+    <tr><th>Methods</th>
+        <th>Return Value</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+
+    <tr>
+        <td><code>pan(heading:number, pitch:number, duration:number|1000)</code></td>
+        <td><code><a href="#PanoAnimation">this</a></code></td>
+        <td>duration毫秒内，将视野中心以动画方式平移至{heading , pitch}处。</td>
+    </tr>
+    <tr>
+        <td><code>zoom(zoom:number, duration:number|1000)</code></td>
+        <td><code><a href="#PanoAnimation">this</a></code></td>
+        <td>duration毫秒内，以动画方式缩放视野。</td>
+    </tr>
+
+    <tr>
+        <td><code>bounce(zoom:number, duration:number|1000)</code></td>
+        <td><code><a href="#PanoAnimation">this</a></code></td>
+        <td>与zoom类似，duration/2 时间内缩放至zoom，之后的一半时间重新缩放至原先大小.</td>
+    </tr>
+
+    <tr>
+        <td><code>fly(heading:number, pitch:number, zoom:number , duration:number|1000 , isbounce : boolean|false)</code></td>
+        <td><code><a href="#PanoAnimation">this</a></code></td>
+        <td>pan和zoom的组合效果，isbounce为true时，将以 bounce 代替 zoom 。</td>
+    </tr>
+
+    <tr>
+        <td><code>wait(duration:number)</code></td>
+        <td><code><a href="#PanoAnimation">this</a></code></td>
+        <td>等待duration后执行下一个动画。</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2 id="event">
+    P.Event
+    namespace
+</h2>
+<h3>Static Methods</h3>
+<table width="100%">
+    <thead>
+    <tr><th>Methods</th>
+        <th>Return Value</th>
+        <th>Description</th>
+    </tr></thead>
+    <tbody>
+
+    <tr>
+        <td><code>on(el:HTMLElement, eventName:string, handler:Function, scope:Object)</code></td>
+        <td><code><a href="#MapsEventListener">MapsEventListener</a></code></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><code>un(el:HTMLElement, eventName:string, handler:Function)</code></td>
+        <td><code><a href="#MapsEventListener">MapsEventListener</a></code></td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td><code>trigger(el:HTMLElement, eventName:string, id:string, var_args:*)</code></td>
+        <td><code>None</code></td>
+        <td>Triggers the given event. All arguments after eventName are passed as arguments to the listeners.</td>
+    </tr>
+    </tbody>
+</table>
+
+</div>
+
+
+</div>
+
+<div class="footer">
+
+    <!--<div class="license">
+        <p>版权声明 本页面中的内容已获得<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/cn/">知识共享署名3.0许可</a></p>
+    </div>-->
+
+
+    <div id="last-updated">Last updated Jan 12, 2015.</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+</div>
+</body>
+</html>
