@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>好望山样板间</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="../../dist/P.css"/>
+    <style>
+        body {
+            color: #808080;
+            font-family:Monospace;
+            font-size:13px;
+            text-align:center;
+            background-color: #ffffff;
+            margin: 0px;
+            overflow: hidden;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="pano" style="position:absolute;left:0px;top:0;width:100%;height:100%;"></div>
+
+<script src="../../dist/P_debug.js"></script>
+<script src="../../dist/Px.js"></script>
+<script>
+
+
+//{content:"前台",type:"span" , action:"setPano,414102430314532120096324001", position : {lat:0 , lng:340} }
+    var data = {
+        "owner": "HQT", "provider": {"id": "Local", "link": "http://www.hqtc.cn/", title: "红权科技(HQT)"}, "description": "好望山样板间",
+        "basic": {"tileSize": 512, "level": 0, "maxpixelzoom":0,"type": "cube","onceMode":true, "ignoneLv0":false},
+        "scene": [
+            {
+                "title" :"所有",
+                "pano":[
+                    {
+                        "id": "01", "title": "酒店门口", "links": [] ,"pois":[]
+                    },
+                    {
+                        "id": "02", "title": "会议现场-前", "links": [] ,"pois":[]
+                    },
+                    {
+                        "id": "03", "title": "大堂", "links": [] ,"pois":[]
+                    },
+                    {
+                        "id": "04", "title": "副局长讲话", "links": [] ,"pois":[]
+                    },
+                    {
+                        "id": "05", "title": "方向与方法", "links": [] ,"pois":[]
+                    },
+                    {
+                        "id": "06", "title": "浙江酒店业报告", "links": [] ,"pois":[]
+                    },
+                ]
+            }
+        ]
+    };
+
+
+    var p = P.pano({
+        'render':'css' ,
+        'node' :"pano" ,
+        'addressControl' :false,
+        '_renderPreview' : true,
+        'displayPOI':false/*,
+        'provider': new P.provider.LocalProvider({
+            size:data.basic.tileSize,
+            data:data,
+            maxpixelzoom:data.basic.maxpixelzoom ,
+            onceMode:data.basic.onceMode ,
+            maxDeep:data.basic.level ,
+            ignoneLv0:data.basic.ignoneLv0,
+            renderPreview : true
+        })*/
+    })
+    .addControl( new P.control.Mix({data:data}) );
+
+     document.getElementById('pano').addEventListener('click' , function(e){
+		var vec3= p._camera._unprojectSphere( {x:e.clientX , y:e.clientY } ); 
+		console.log('lat:'+vec3.y+',lng:'+vec3.x);
+		//console.log(p.getPov());
+    })
+    //var a = new P.object.Arrows(p);
+//    p.addControl( new P.control.Mix({data:data}) );
+
+</script>
+
+</body>
+</html>

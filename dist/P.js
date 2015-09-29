@@ -17,7 +17,7 @@
 
     P.noConflict = function () {  window.P = oriP; return this;};
 
-    P.version = '20150112';
+    P.version = '20150928';
 
     window.P = P;
 

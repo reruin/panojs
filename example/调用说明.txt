@@ -1,0 +1,23 @@
+﻿用到的公开API:
+1.逆地址解析1 , 热点1:
+http://open.map.qq.com/webservice_v1/guide-gcoder.html
+
+
+非公开API:
+1. 逆地址解析2
+http://sv.map.qq.com/rarp?lat={lat}&lng={lng}&output=json
+
+2. 通用svid信息
+http://sv0.map.qq.com/sv?pf=html5&svid={svid}&ch=&output=json
+
+3.子场景信息
+http://sv.map.qq.com/photos?id={scenic_id}&output=json
+
+4. 热点2
+http://sv.map.soso.com/poi3d?x={lng}&y={lat}&source=qq&type=street&output=json
+
+5.图片调用：
+瓦片 http://sv{server}.map.qq.com/tile?svid={svid}&x={x}&y={y}&level={z}&mtype=mobile-cube&from=web
+瓦片preview http://sv0.map.qq.com/thumb?svid={svid}&x=0&y=0&level=0&mtype=mobile-cube
+预览图 http://capture.map.qq.com/screenshot?model=web&from=qqmap&zoom={zoom}&fov={fov}&width={width}&height={height}&pano={svid}&pitch={pitch}&heading={heading}
+

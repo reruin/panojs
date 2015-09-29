@@ -166,7 +166,7 @@ Compiler.prototype = {
             var t = typeof(this.list[i]) == "string" ? this.list[i] : this.list[i].name;
             arr.push(t.replace(/P\./,"").replace(/\./g,'/'));
         }
-        var debug = '(function(){var mods = ["' + arr.join('","') + '"];var tpl="<script type=\'text/javascript\' src=\'../src/{url}.js?{stamp}\'><\/script>";for(var i in mods){document.write(tpl.replace("{url}",mods[i]));}}());';
+        var debug = '(function(){var mods = ["' + arr.join('","') + '"];var base=window.PANO_BASE_LIB||"../../src/";var tpl="<script type=\'text/javascript\' src=\'"+base+"{url}.js?{stamp}\'><\/script>";for(var i in mods){document.write(tpl.replace("{url}",mods[i]));}}());';
 
         fs.writeFileSync(combineFile+"_debug.js", debug, 'utf8');
     }

@@ -1,0 +1,43 @@
+
+/* P.control.Popup */
+.pano-popup-close
+{
+    display: block;
+    position: fixed;
+    right: 10px;
+    top: 10px;
+    font-size: 0.01em;
+    text-indent: -9999em;
+    background: url(icons/back.png) no-repeat;
+    width: 32px;
+    height: 32px;
+}
+
+.pano-popup-show{
+
+}
+
+.pano-control-popup{
+    -webkit-transition: 0.3s ease;
+    -o-transition: 0.3s ease;
+    -moz-transition: 0.3s ease;
+    transition: 0.3s ease;
+}
+
+/** P.control.Sounder **/
+.pano-control-sounder{
+    transform: translateZ(1000000000000px);
+    z-index:9999999999;
+    position: absolute;
+    right: 10px;
+    top: 30px;
+}
+.pano-sounder-control{
+    display: block;
+    background-image: url(icons/sound.png);
+    background-position: 0 0;
+    width: 32px;
+    height: 32px;
+}
+
+.mute{background-position: 0 32px; }

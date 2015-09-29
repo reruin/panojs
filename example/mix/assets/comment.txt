@@ -1,0 +1,48 @@
+﻿{
+  "status": "OK",
+  "count": 3,
+  "reviews": [
+    {
+      "review_id": 49302627,
+      "user_nickname": "weixin_91465823817679889",
+      "created_time": "2014-10-04",
+      "text_excerpt": "环境很好，有免费的沐浴，海燕姐给我做的手法很好，疏通了经络，皮肤也变通透了许多，值得体验！",
+      "review_rating": 5,
+      "rating_img_url": "http://i3.dpfile.com/s/i/app/api/32_5star.png",
+      "rating_s_img_url": "http://i2.dpfile.com/s/i/app/api/16_5star.png",
+      "product_rating": 3,
+      "decoration_rating": 4,
+      "service_rating": 3,
+      "review_url": "http://dpurl.cn/p/tn-RH4CDWq"
+    },
+    {
+      "review_id": 49302262,
+      "user_nickname": "乌龟太太在哪",
+      "created_time": "2014-10-03",
+      "text_excerpt": "团购的，服务好，没有多余的推销，美容师琴琴手法很好，强烈推荐！",
+      "review_rating": 5,
+      "rating_img_url": "http://i3.dpfile.com/s/i/app/api/32_5star.png",
+      "rating_s_img_url": "http://i1.dpfile.com/s/i/app/api/16_5star.png",
+      "product_rating": 4,
+      "decoration_rating": 4,
+      "service_rating": 4,
+      "review_url": "http://dpurl.cn/p/8SyN1cZJKf"
+    },
+    {
+      "review_id": 49301850,
+      "user_nickname": "薰沫沫",
+      "created_time": "2014-10-03",
+      "text_excerpt": "团购的，但是服务非常不错，美容师洋洋很体贴，会问顾客的需求。环境也很好，单人间。",
+      "review_rating": 5,
+      "rating_img_url": "http://i1.dpfile.com/s/i/app/api/32_5star.png",
+      "rating_s_img_url": "http://i1.dpfile.com/s/i/app/api/16_5star.png",
+      "product_rating": 4,
+      "decoration_rating": 4,
+      "service_rating": 4,
+      "review_url": "http://dpurl.cn/p/9s7WHMznvm"
+    }
+  ],
+  "additional_info": {
+    "more_reviews_url": "http://dpurl.cn/p/84VMxE5Ots"
+  }
+}
