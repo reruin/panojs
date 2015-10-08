@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+        <title>Tencent Panorama</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+		<link rel="stylesheet" href="../../dist/P.css"/>
+		<style>
+			body{width:100%;height:100%;position: absolute;padding:0;margin:0;}
+		</style>
+	</head>
+	<body>
+
+		<div id="pano" style="position:absolute;left:0px;top:0;width:100%;height:100%;"></div>
+
+		<script src="../../dist/P_debug.js"></script>
+		<script src="../../dist/Px.js"></script>
+		<script>
+
+			//var url = "http://www.86rm.com/demo/panoviewerh/img/cube/3/ipad_{f}.jpg";
+			//var preview = "http://www.86rm.com/demo/panoviewerh/img/cube/3/preview.jpg";
+			var url = "d2/4x_0kg2Dv_ogb_gzw_Fvkq__{f}.jpg";
+			var preview = "d2/4x_0kg2Dv_ogb_gzw_Fvkq_preview.jpg";
+            var p = P({render:"auto" , node :"pano" ,  debug : true , ignoreLv0:false})
+					.addProvider( new P.provider.BasicProvider( {'id':'1','url':url , 'preview':preview , 'size':512} ))
+					.setPano('1')
+
+		</script>
+
+	</body>
+</html>
